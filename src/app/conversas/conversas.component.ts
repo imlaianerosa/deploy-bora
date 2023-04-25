@@ -12,7 +12,9 @@ import { BoraStore } from '../store/bora.store';
 export class ConversasComponent extends BaseBoraComponent {
   menuOpen = false;
   mensagens: any;
-  pessoaConversa: [{}];
+  pessoaConversa: any[] = [];
+  nomeUsu: any
+  fotoUsu: any
 
   constructor(
     private router: Router,
@@ -27,54 +29,31 @@ export class ConversasComponent extends BaseBoraComponent {
       this.mensagens = dados;
     });
 
-    // this.listarUser()
-    // setTimeout(() => {
-    //   for (let i = 0; i < this.conversas.length; i++) {
-    //     if (this.pessoaConversa.filter(this.conversas[i].idUsuDestino)) {
-    //       if (
-    //         this.conversas[i].idUsuDestino !==
-    //         this.boraStore.getIdUsuarioLogado()
-    //       ) {
-    //         this.pessoaConversa.push(this.conversas[i].idUsuDestino);
-    //       }
-    //     }
-
-    //     if (this.pessoaConversa.filter(this.conversas[i].idUsuario)) {
-    //       if (
-    //         this.conversas[i].idUsuario !== this.boraStore.getIdUsuarioLogado()
-    //       ) {
-    //         this.pessoaConversa.push(this.conversas[i].idUsuario);
-    //       }
-    //     }
-    //   }
-    // }, 2000);
-    // setTimeout(() => {
-    //   console.log(this.pessoaConversa)
-    // }, 3000);
+    this.listarUser()
   }
 
-  listarUser() {
-    this.service.getMessages().subscribe((dados: any[]) => {
+  async listarUser() {
+    await this.service.getMessages().subscribe(async (dados: any[]) => {
       this.mensagens = dados;
-    });
-
-    const idUsuarioLogado = this.boraStore.getIdUsuarioLogado(); // ID do usuário logado
-    const idsUsuarios: any[] = []; // Lista vazia para armazenar os IDs dos usuários que trocaram mensagem com o usuário logado
-
-    this.mensagens.forEach((mensagem: { idUsuario: any; idUsuDestino: any; }) => {
-      const remetente = mensagem.idUsuario;
-      const destinatario = mensagem.idUsuDestino;
-
-      // Se o remetente ou destinatário da mensagem for o usuário logado, adicionamos o ID do outro usuário na lista
-      if (remetente === idUsuarioLogado) {
-        idsUsuarios.push(destinatario);
-      } else if (destinatario === idUsuarioLogado) {
-        idsUsuarios.push(remetente);
-      }
-
-      setTimeout(() => {
-        console.log(idsUsuarios)
-      }, 1500);
+      const idUsuarioLogado = this.boraStore.getIdUsuarioLogado();
+      const idsUsuarios: any[] = []; 
+      await this.mensagens.forEach((mensagem: { idUsuario: any; idUsuDestino: any; }) => {
+        const remetente = mensagem.idUsuario;
+        const destinatario = mensagem.idUsuDestino;
+        if ((remetente === idUsuarioLogado) && (!idsUsuarios.includes(destinatario))) {
+          idsUsuarios.push(destinatario);
+        } else if ((destinatario === idUsuarioLogado) && (!idsUsuarios.includes(remetente))) {
+          idsUsuarios.push(remetente);
+        }
+      })
+      setTimeout(async () => {
+        for (let i = 0; i < idsUsuarios.length; i++) {
+          const idUsuario = idsUsuarios[i];
+          await this.service.getUserById(idUsuario).subscribe(usu => {
+            this.pessoaConversa.push(usu[0]);
+          });
+        }
+      }, 900);
     });
   }
 
