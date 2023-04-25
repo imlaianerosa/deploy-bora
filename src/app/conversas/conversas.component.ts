@@ -57,7 +57,8 @@ export class ConversasComponent extends BaseBoraComponent {
     });
   }
 
-  goToChat() {
+  goToChat(index: number) {
+    this.boraStore.setIdUsuarioEvento(this.pessoaConversa[index].idUsuario)
     this.router.navigate(['/chat']);
   }
 

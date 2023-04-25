@@ -73,7 +73,6 @@ export class ChatComponent extends BaseBoraComponent {
           );
         }
       );
-      console.log('MENSAGEM ENVIADA', this.mensagemEnviada);
     }, 1500);
 
     setTimeout(() => {

@@ -8,7 +8,7 @@
   </div>
 
   <div class="conversas">
-    <div class="chat" *ngFor="let usu of pessoaConversa">
+    <div class="chat" *ngFor="let usu of pessoaConversa; let i = index" (click)="goToChat(i)">
       <img
         [src]="usu.fotoPerfil"
         alt=""
