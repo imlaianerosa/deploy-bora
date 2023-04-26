@@ -26,11 +26,12 @@ export class ChatComponent extends BaseBoraComponent {
   dadoUsuarioMensagem: any;
   nomeUser: any;
   fotoUser: any;
+  todas: any
 
   constructor(
     private router: Router,
     private chatService: ChatService,
-    private store: BoraStore,
+    public store: BoraStore,
     private cd: ChangeDetectorRef
   ) {
     super();
@@ -65,27 +66,23 @@ export class ChatComponent extends BaseBoraComponent {
       .subscribe((dados) => (this.mensagem = dados));
 
     setTimeout(() => {
-      this.mensagemEnviada = this.mensagem.filter(
+      this.todas = this.mensagem.filter(
         (mensagem: { idUsuario: any; idUsuDestino: any }) => {
           return (
-            mensagem.idUsuario === this.store.getIdUsuarioLogado() &&
-            mensagem.idUsuDestino === this.store.getIdUsuarioEvento()
+            (mensagem.idUsuario === this.store.getIdUsuarioLogado() &&
+              mensagem.idUsuDestino === this.store.getIdUsuarioEvento()) ||
+            (mensagem.idUsuario === this.store.getIdUsuarioEvento() &&
+              mensagem.idUsuDestino === this.store.getIdUsuarioLogado())
           );
-        }
-      );
-    }, 1500);
+        },
+        setTimeout(() => {
+          this.todas.sort((a: { dataHora: string | number | Date; }, b: { dataHora: string | number | Date; }) => {
+            return new Date(b.dataHora).getTime() - new Date(a.dataHora).getTime();
+          })
 
-    setTimeout(() => {
-      this.mensagemRecebida = this.mensagem.filter(
-        (mensagem: { idUsuario: any; idUsuDestino: any }) => {
-          return (
-            mensagem.idUsuario === this.store.getIdUsuarioEvento() &&
-            mensagem.idUsuDestino === this.store.getIdUsuarioLogado()
-          );
-        }
+        }, 1000)
       );
-      console.log('MENSAGEM RECEBIDA', this.mensagemRecebida);
-    }, 1500);
+    }, 1000);
   }
 
   getMessages(): void {
