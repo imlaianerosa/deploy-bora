@@ -8,33 +8,12 @@
   </div>
 
   <div class="conversas">
-    <div class="chat">
+    <div class="chat" *ngFor="let usu of pessoaConversa; let i = index" (click)="goToChat(i)">
       <img
-        src="../../../assets/2D61F2BA-8623-4081-8B70-A7A0951BE317_1_105_c.jpeg"
+        [src]="usu.fotoPerfil"
         alt=""
       />
-      <h1>Laiane</h1>
-    </div>
-    <div class="chat" (click)="goToChat()">
-      <img
-        src="../../../assets/239363815_344713897664306_3306552333959732867_n.jpeg"
-        alt=""
-      />
-      <h1>Bruna</h1>
-    </div>
-    <div class="chat">
-      <img
-        src="../../../assets/158839936_118618393853922_8781297424711075173_n.jpeg"
-        alt=""
-      />
-      <h1>Alice</h1>
-    </div>
-    <div class="chat">
-      <img
-        src="../../../assets/ab190e81-efe8-4ffe-a6c1-ecc2ddf017c1.jpeg"
-        alt=""
-      />
-      <h1>Samuel</h1>
+      <h1> {{ usu.nome }} </h1>
     </div>
   </div>
 </section>

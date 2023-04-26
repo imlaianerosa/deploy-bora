@@ -13,11 +13,7 @@
       <h1> {{ nomeUser }} </h1>
     </div>
     <div class="balloon" >
-      <div class="sent" *ngFor="let message of mensagemEnviada">
-        <p> {{ message.mensagem }} <span> {{ message.dataHoraEnvio }} </span></p>
-      </div>
-
-      <div class="received" *ngFor="let message of mensagemRecebida">
+      <div *ngFor="let message of todas" [ngClass]="{'sent': message.idUsuario === this.store.getIdUsuarioLogado(), 'received': message.idUsuario === this.store.getIdUsuarioEvento()}">
         <p> {{ message.mensagem }} <span> {{ message.dataHoraEnvio }} </span></p>
       </div> 
     </div> 
