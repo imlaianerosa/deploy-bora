@@ -14,8 +14,8 @@ import { BaseBoraComponent } from '../shared/components/base-bora/base-bora.comp
 })
 export class LoginComponent extends BaseBoraComponent {
   form = new FormGroup({
-    email: new FormControl('laianerosasi@gmail.com', [Validators.required, Validators.email]),
-    senha: new FormControl('@Laiane18', [
+    email: new FormControl('', [Validators.required, Validators.email]),
+    senha: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
       // Validators.pattern(/^(?=.*[A-Z])(?=.*\d)/),
