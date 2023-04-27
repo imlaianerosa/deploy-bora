@@ -25,18 +25,19 @@ export class CadastroComponent {
     ]),
     fotoPerfil: new FormControl('', Validators.required),
   });
-
-  submitted = false;
+  mostrarModal = false
   base64: any;
   dadosUsuarios: Usuarios;
   idUsuario: any;
+  erro = "Ops! Ocorreu um erro, revise seus dados e tente novamente."
+
 
   constructor(
     private router: Router,
-    private cadastroService: CadastroService, 
-  ) {}
+    private cadastroService: CadastroService,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onInputChanged(event: any) {
     let targetEvent = event.target;
@@ -58,17 +59,28 @@ export class CadastroComponent {
       fotoPerfil: this.base64,
     };
 
-    // if (this.form.valid) {
+    if (this.form.valid) {
       this.cadastroService.postUsuarios(this.dadosUsuarios).subscribe(
         (success) => this.router.navigate(['/login']),
-        (error) => console.error(error)
+        (error) => this.mostrarModal = true
       );
-    // }
+    } else if(this.form.invalid){
+      this.openModalFalha()
+    }
   }
 
+  sucesso() {
+    this.goToLogin();
+  }
 
+  openModalFalha() {
+    this.erro = "Revise seus dados. Lembre-se que você deve informar seu nome completo, e-mail, seu link do LinkedIn, uma foto e sua senha que deve conter no mínimo 8 caracteres, contendo um carecter especial, uma letra maiúscula, uma minúscula e um número."
+    this.mostrarModal = true
+  }
 
-  
+  closeModal() {
+    this.mostrarModal = false;
+  }
 
   goToLogin() {
     this.router.navigate(['/login']);

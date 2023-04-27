@@ -84,3 +84,18 @@
     </footer>
   </form>
 </div>
+
+<div class="modal" *ngIf="mostrarModal">
+  <div class="container">
+    <div class="topo">
+      <img
+        (click)="closeModal()"
+        src="../../../assets/close circle_.svg"
+        alt=""
+      />
+    </div>
+    <div class="content-modal">
+      <h1>{{ erro }}</h1>
+    </div>
+  </div>
+</div>

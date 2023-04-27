@@ -54,11 +54,13 @@ export class LoginComponent extends BaseBoraComponent {
       .subscribe((dados) => (this.idUsuario = dados));
     setTimeout(() => {
       this.boraStore.setIdUsuarioLogado(this.idUsuario);
-      if (this.idUsuario) {
-        this.goToFeed();
-      } else {
-        this.openModalFalhaLogin();
-      }
+     setTimeout(() => {
+       if (this.idUsuario) {
+          this.goToFeed();
+        } else {
+          this.openModalFalhaLogin();
+        }
+    }, 500); 
     }, 1000);
   }
 

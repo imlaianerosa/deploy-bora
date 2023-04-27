@@ -1,6 +1,7 @@
 .chat {
   width: 100%;
   display: grid;
+
   .header {
     color: #f5f5f5;
     width: 90%;
@@ -28,16 +29,25 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 18px;
+
     img {
       width: 30px;
       height: 30px;
       border-radius: 100px;
       background-color: #f5f5f5;
     }
+
     h1 {
       color: #f5f5f5;
       margin: 0px 0px 0px 16px;
     }
+  }
+
+  form {
+    background-color: #232558;
+    margin-bottom: -13px;
+    height: 70px;
+    border-radius: 10px;
   }
 
   .balloon {
@@ -50,12 +60,14 @@
     justify-content: end;
     text-align: end;
     margin-right: 12px;
+
     p {
       display: grid;
       width: 60%;
       background: #d7dae1;
       border-radius: 10px;
       padding: 5px;
+
       span {
         font-size: 0.5em;
         margin-right: 2.5px;
@@ -66,12 +78,14 @@
   .received {
     display: flex;
     margin-left: 12px;
+
     p {
       width: 60%;
       background: rgb(146 188 168);
       border-radius: 10px;
       padding: 5px;
       display: grid;
+
       span {
         font-size: 0.5em;
         margin-left: 2.5px;
@@ -86,6 +100,7 @@
     width: 80%;
     align-items: end;
     text-align: center;
+
     input {
       background-color: #fff;
       width: 72%;
@@ -93,6 +108,7 @@
       border-radius: 10px;
       margin: 30px 8% 0 5%;
     }
+
     img {
       margin-bottom: -6px;
       margin-right: 6px;
