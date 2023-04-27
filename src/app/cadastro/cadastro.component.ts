@@ -14,7 +14,7 @@ export class CadastroComponent {
   form = new FormGroup({
     nome: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[a-zA-Z\s]+$/),
+      Validators.minLength(3)
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
     linkedin: new FormControl('', Validators.required),
@@ -23,7 +23,7 @@ export class CadastroComponent {
       Validators.minLength(8),
       Validators.pattern(/^(?=.*[A-Z])(?=.*\d)/),
     ]),
-    fotoPerfil: new FormControl('',),
+    fotoPerfil: new FormControl('', Validators.required),
   });
 
   submitted = false;
@@ -58,12 +58,12 @@ export class CadastroComponent {
       fotoPerfil: this.base64,
     };
 
-    if (this.form.valid) {
+    // if (this.form.valid) {
       this.cadastroService.postUsuarios(this.dadosUsuarios).subscribe(
         (success) => this.router.navigate(['/login']),
         (error) => console.error(error)
       );
-    }
+    // }
   }
 
 
