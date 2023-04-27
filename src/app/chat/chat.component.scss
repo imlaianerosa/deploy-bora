@@ -46,8 +46,10 @@
   form {
     background-color: #232558;
     margin-bottom: -13px;
-    height: 70px;
+    height: 60px;
     border-radius: 10px;
+    align-items: center;
+    display: flex;
   }
 
   .balloon {
@@ -106,7 +108,7 @@
       width: 72%;
       height: 25px;
       border-radius: 10px;
-      margin: 30px 8% 0 5%;
+      margin: 0px 8% 0 5%;
     }
 
     img {
