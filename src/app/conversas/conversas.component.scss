@@ -2,18 +2,22 @@
   width: 100%;
   display: grid;
   .header {
+    background-color: #02053c;
     color: #f5f5f5;
     width: 90%;
     display: flex;
     justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 24px;
+    position: fixed;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 8%;
+    padding-bottom: 6%;
   }
 
   .titulo {
+    margin-top: 70px;
+    background-color: #02053c;
     h1 {
-      margin-top: 32px;
       color: #fff;
       text-align: center;
       font-size: 2em;
