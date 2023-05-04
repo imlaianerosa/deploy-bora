@@ -41,12 +41,11 @@
     .chat {
       display: flex;
       border-bottom: 1px solid grey;
-      margin-bottom: 12px;
+      align-items: center;
     }
   }
 }
 
-/* Estilo do cabeçalho */
 header {
   display: flex;
   justify-content: space-between;
@@ -56,7 +55,6 @@ header {
   color: #fff;
 }
 
-/* Estilo do botão de menu */
 header button {
   background-color: transparent;
   border: none;
@@ -65,7 +63,6 @@ header button {
   cursor: pointer;
 }
 
-/* Estilo do menu lateral */
 nav.sidebar {
   position: fixed;
   top: 0;
@@ -80,13 +77,11 @@ nav.sidebar {
   z-index: 1;
 }
 
-/* Estilo do menu lateral quando aberto */
 nav.sidebar.open {
   transform: translateX(0);
   z-index: 1;
 }
 
-/* Estilo dos links do menu */
 nav.sidebar ul {
   list-style: none;
   padding: 0;
