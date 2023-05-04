@@ -1,4 +1,4 @@
-<section class="talks">
+<section class="talks" *ngIf="!load">
   <div class="header">
     <img (click)="goToFeed()" src="../../../assets/arrow left_.svg" alt="" />
     <img src="../../../assets/menu_.svg" alt="" (click)="toggleMenu()" />
@@ -26,3 +26,7 @@
     <li><a (click)="exit()">Sair</a></li>
   </ul>
 </nav>
+
+<div class="load" *ngIf="load" >
+  <div class="spinner"></div>
+</div>

@@ -29,6 +29,7 @@ export class FeedComponent extends BaseBoraComponent {
   // usuarios: any;
   usuariosFoto: any;
   perfiil: any;
+  load = true;
   private readonly APIUSUARIO =
     'https://tg-bora-api.vercel.app/getusuariosbyId/';
 
@@ -43,8 +44,13 @@ export class FeedComponent extends BaseBoraComponent {
 
   ngOnInit(index: number): void {
     this.feedService.getEventos().subscribe((dados: any[]) => {
-      this.eventos = dados;
-    });
+      setTimeout(() => {
+        this.eventos = dados;
+        this.load = false;
+      }, 2000);
+      }, (error) => {
+        this.load = false;
+      });
 
     this.feedService.getEventos().subscribe(publicacoes => {
       this.eventos = publicacoes;
@@ -54,8 +60,11 @@ export class FeedComponent extends BaseBoraComponent {
           this.feedService.getDadosUsuarios(idUsuario).subscribe(usuario => {
             this.usuarios[i] = usuario[0];
           });
+          setTimeout(() => {
+            this.load = false;
+          }, 2000);
         }
-      }, 1000);
+      }, 1);
     });
   }
   
@@ -115,4 +124,6 @@ export class FeedComponent extends BaseBoraComponent {
     this.router.navigate(['/']);
     this.onDestroy;
   }
+
+
 }

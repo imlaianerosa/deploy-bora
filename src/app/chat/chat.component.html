@@ -1,4 +1,4 @@
-<section class="chat">
+<section class="chat" *ngIf="!load">
   <div class="header">
     <img (click)="goToChats()" src="../../../assets/arrow left_.svg" alt="" />
     <img src="../../../assets/menu_.svg" (click)="toggleMenu()" alt="" />
@@ -38,3 +38,7 @@
     <li><a (click)="exit()">Sair</a></li>
   </ul>
 </nav>
+
+<div class="load" *ngIf="load" >
+  <div class="spinner"></div>
+</div>

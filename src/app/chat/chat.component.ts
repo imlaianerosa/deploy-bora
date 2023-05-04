@@ -27,6 +27,7 @@ export class ChatComponent extends BaseBoraComponent {
   nomeUser: any;
   fotoUser: any;
   todas: any
+  load = true
 
   constructor(
     private router: Router,
@@ -63,7 +64,12 @@ export class ChatComponent extends BaseBoraComponent {
   getMensagem() {
     this.chatService
       .getMessages()
-      .subscribe((dados) => (this.mensagem = dados));
+      .subscribe((dados) => {
+        setTimeout(() => {
+          this.load = false
+        }, 2000);
+        this.mensagem = dados
+      })
 
     setTimeout(() => {
       this.todas = this.mensagem.filter(

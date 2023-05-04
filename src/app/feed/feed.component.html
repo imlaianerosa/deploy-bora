@@ -1,9 +1,9 @@
-<section class="feed">
+<section class="feed"  *ngIf="!load">
   <div class="header">
     <h1>Feed</h1>
     <img src="../../../assets/menu_.svg" alt="" (click)="toggleMenu()" />
   </div>
-  <div class="evento" *ngFor="let evento of eventos; let i = index"  >
+  <div class="evento" *ngFor="let evento of eventos; let i = index" >
     <div class="nome" >
       <img
         (click)="setDadosDoUsuario(i)"
@@ -31,7 +31,6 @@
       <button class="button" (click)="onItemClick(i)">Bora?!</button>
     </div>
   </div>
-
   <footer>
     <img
       (click)="goToRegisterEvent()"
@@ -73,3 +72,8 @@
     <li><a (click)="exit()">Sair</a></li>
   </ul>
 </nav>
+
+<div class="load" *ngIf="load" >
+  <div class="spinner"></div>
+</div>
+

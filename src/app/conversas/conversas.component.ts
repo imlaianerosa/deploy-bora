@@ -15,6 +15,8 @@ export class ConversasComponent extends BaseBoraComponent {
   pessoaConversa: any[] = [];
   nomeUsu: any
   fotoUsu: any
+  load = true;
+
 
   constructor(
     private router: Router,
@@ -26,7 +28,12 @@ export class ConversasComponent extends BaseBoraComponent {
 
   ngOnInit(): void {
     this.service.getMessages().subscribe((dados: any[]) => {
-      this.mensagens = dados;
+      setTimeout(() => {
+        this.mensagens = dados;
+        this.load = false;
+      }, 2000);
+      }, (error) => {
+        this.load = false;
     });
 
     this.listarUser()
