@@ -112,10 +112,6 @@ export class ChatComponent extends BaseBoraComponent {
     };
     if (this.form.valid) {
       this.chatService.sendMessage(messageData).subscribe(
-        //   (success) => console.log('mensagem enviada'),
-        //   (error) => console.error(error)
-        // );
-        // this.form.reset();
         (success) => {
           console.log('mensagem enviada');
           this.getMensagem()

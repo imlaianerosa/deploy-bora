@@ -15,25 +15,21 @@ export class FeedService {
 
   eventoDado: FeedResponse;
 
-  // private readonly url = 'https://tg-bora-api.vercel.app/getusuariosbyId';
-
   constructor(private http: HttpClient) {}
-
-  // getUserById(userId: string): Observable<any> {
-  //   const apiUrl = `${this.url}/${userId}`;
-  //   return this.http.get(apiUrl);
-  // }
 
   getEventos() {
     return this.http.get<FeedResponse[]>(this.APIEVENTO).pipe(tap(console.log));
   }
 
-  getDadosUsuarios(id: string){
-    return this.http.get<any[]>(`${this.APIUSUARIO}${id}`).pipe(tap(console.log));
+  getDadosUsuarios(id: string) {
+    return this.http
+      .get<any[]>(`${this.APIUSUARIO}${id}`)
+      .pipe(tap(console.log));
   }
 
-  getUserById(data: string){
-    return this.http.get<any[]>(`${this.APIUSUARIO}${data}`).pipe(tap(console.log));
+  getUserById(data: string) {
+    return this.http
+      .get<any[]>(`${this.APIUSUARIO}${data}`)
+      .pipe(tap(console.log));
   }
-
 }

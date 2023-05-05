@@ -14,10 +14,8 @@ import { Usuario } from '../state/bora.state';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent extends BaseBoraComponent {
-
-  
   mostrarPerfil: boolean = false;
-  eventos: FeedResponse [] = [];
+  eventos: FeedResponse[] = [];
   usuarios: any[] = [];
   dadoUsuario: any;
   index: number;
@@ -26,7 +24,6 @@ export class FeedComponent extends BaseBoraComponent {
   nomeUser: any;
   linkedin: any;
   email: any;
-  // usuarios: any;
   usuariosFoto: any;
   perfiil: any;
   load = true;
@@ -43,21 +40,24 @@ export class FeedComponent extends BaseBoraComponent {
   }
 
   ngOnInit(index: number): void {
-    this.feedService.getEventos().subscribe((dados: any[]) => {
-      setTimeout(() => {
-        this.eventos = dados;
+    this.feedService.getEventos().subscribe(
+      (dados: any[]) => {
+        setTimeout(() => {
+          this.eventos = dados;
+          this.load = false;
+        }, 2000);
+      },
+      (error) => {
         this.load = false;
-      }, 2000);
-      }, (error) => {
-        this.load = false;
-      });
+      }
+    );
 
-    this.feedService.getEventos().subscribe(publicacoes => {
+    this.feedService.getEventos().subscribe((publicacoes) => {
       this.eventos = publicacoes;
       setTimeout(() => {
-        for(let i = 0; i < publicacoes.length; i++) {
+        for (let i = 0; i < publicacoes.length; i++) {
           const idUsuario = publicacoes[i].idUsuario;
-          this.feedService.getDadosUsuarios(idUsuario).subscribe(usuario => {
+          this.feedService.getDadosUsuarios(idUsuario).subscribe((usuario) => {
             this.usuarios[i] = usuario[0];
           });
           setTimeout(() => {
@@ -67,7 +67,6 @@ export class FeedComponent extends BaseBoraComponent {
       }, 1);
     });
   }
-  
 
   onItemClick(index: number): void {
     this.boraStore.setIdUsuarioEvento(this.eventos[index].idUsuario);
@@ -124,6 +123,4 @@ export class FeedComponent extends BaseBoraComponent {
     this.router.navigate(['/']);
     this.onDestroy;
   }
-
-
 }

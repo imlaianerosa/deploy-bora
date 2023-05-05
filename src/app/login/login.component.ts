@@ -18,7 +18,6 @@ export class LoginComponent extends BaseBoraComponent {
     senha: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      // Validators.pattern(/^(?=.*[A-Z])(?=.*\d)/),
     ]),
   });
 
