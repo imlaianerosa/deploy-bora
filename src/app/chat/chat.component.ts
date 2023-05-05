@@ -39,7 +39,6 @@ export class ChatComponent extends BaseBoraComponent {
   }
 
   ngOnInit(): void {
-    // this.getMessages();
     this.getDadosUser();
     this.getMensagem();
   }
@@ -53,7 +52,12 @@ export class ChatComponent extends BaseBoraComponent {
 
     this.chatService
       .getDadosUsuarios(idUserEvento)
-      .subscribe((dados) => (this.dadoUsuarioMensagem = dados));
+      .subscribe((dados) => {
+        this.dadoUsuarioMensagem = dados
+        setTimeout(() => {
+          this.load = false
+        }, 1000);
+      });
 
     setTimeout(() => {
       this.nomeUser = this.dadoUsuarioMensagem[0].nome;
@@ -67,7 +71,7 @@ export class ChatComponent extends BaseBoraComponent {
       .subscribe((dados) => {
         setTimeout(() => {
           this.load = false
-        }, 2000);
+        }, 1000);
         this.mensagem = dados
       })
 
@@ -98,13 +102,6 @@ export class ChatComponent extends BaseBoraComponent {
     this.cd;
   }
 
-  sendMessage(): void {
-    this.chatService.sendMessage(this.newMessage).subscribe(() => {
-      this.newMessage = '';
-      this.getMessages();
-    });
-  }
-
   postMensagem() {
     this.idUsuDestino = this.store.getIdUsuarioEvento();
     const messageData = {
@@ -115,11 +112,23 @@ export class ChatComponent extends BaseBoraComponent {
     };
     if (this.form.valid) {
       this.chatService.sendMessage(messageData).subscribe(
-        (success) => this.getMensagem(),
+        //   (success) => console.log('mensagem enviada'),
+        //   (error) => console.error(error)
+        // );
+        // this.form.reset();
+        (success) => {
+          console.log('mensagem enviada');
+          this.getMensagem()
+          this.adicionarMensagem(messageData);
+        },
         (error) => console.error(error)
       );
       this.form.reset();
     }
+  }
+
+  adicionarMensagem(mensagem: any): void {
+    this.mensagem.push(mensagem);
   }
 
   goToChats() {
