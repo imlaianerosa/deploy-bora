@@ -11,8 +11,8 @@ import { Usuarios } from './cadastro';
 })
 export class CadastroComponent {
   form = new FormGroup({
-    nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    nome: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     linkedin: new FormControl('', Validators.required),
     senha: new FormControl('', [
       Validators.required,
