@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CadastroService } from './cadastro.service';
 import { Usuarios } from './cadastro';
 
-
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -12,10 +11,7 @@ import { Usuarios } from './cadastro';
 })
 export class CadastroComponent {
   form = new FormGroup({
-    nome: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3)
-    ]),
+    nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     linkedin: new FormControl('', Validators.required),
     senha: new FormControl('', [
@@ -25,19 +21,18 @@ export class CadastroComponent {
     ]),
     fotoPerfil: new FormControl('', Validators.required),
   });
-  mostrarModal = false
+  mostrarModal = false;
   base64: any;
   dadosUsuarios: Usuarios;
   idUsuario: any;
-  erro = "Ops! Ocorreu um erro, revise seus dados e tente novamente."
-
+  erro : string;
 
   constructor(
     private router: Router,
-    private cadastroService: CadastroService,
-  ) { }
+    private cadastroService: CadastroService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onInputChanged(event: any) {
     let targetEvent = event.target;
@@ -61,11 +56,16 @@ export class CadastroComponent {
 
     if (this.form.valid) {
       this.cadastroService.postUsuarios(this.dadosUsuarios).subscribe(
-        (success) => this.router.navigate(['/login']),
-        (error) => this.mostrarModal = true
+        () => {
+          this.goToLogin()
+        },
+        (error) => {
+          this.erro = 'Ops! Ocorreu um erro, revise seus dados e tente novamente.';
+          this.mostrarModal = true;
+        }
       );
-    } else if(this.form.invalid){
-      this.openModalFalha()
+    } else if (this.form.invalid) {
+      this.openModalFalha();
     }
   }
 
@@ -74,8 +74,9 @@ export class CadastroComponent {
   }
 
   openModalFalha() {
-    this.erro = "Revise seus dados. Lembre-se que você deve informar seu nome completo, e-mail, seu link do LinkedIn, uma foto e sua senha que deve conter no mínimo 8 caracteres, contendo um carecter especial, uma letra maiúscula, uma minúscula e um número."
-    this.mostrarModal = true
+    this.erro =
+      'Revise seus dados. Lembre-se que você deve informar seu nome completo, e-mail, seu link do LinkedIn, uma foto e sua senha que deve conter no mínimo 8 caracteres, contendo um carecter especial, uma letra maiúscula, uma minúscula e um número.';
+    this.mostrarModal = true;
   }
 
   closeModal() {
