@@ -20,6 +20,8 @@ export class CadastroComponent {
       Validators.pattern(/^(?=.*[A-Z])(?=.*\d)/),
     ]),
     fotoPerfil: new FormControl('', Validators.required),
+    termo: new FormControl('', Validators.required),
+
   });
   mostrarModal = false;
   base64: any;
