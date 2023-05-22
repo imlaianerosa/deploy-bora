@@ -2,7 +2,7 @@
   &__img {
     bottom: 0%;
     top: 0px;
-    width: 26vh;
+    width: 20vh;
     top: -10px;
   }
 }
@@ -51,7 +51,7 @@ label {
 }
 
 footer {
-  height: 74px;
+  height: 50px;
 }
 
 .btn {
@@ -61,7 +61,7 @@ footer {
   display: flex;
   justify-content: center;
   &__entrar {
-    margin-top: 15px;
+    margin-top: 6px;
     width: 100%;
     font-size: 1em;
     color: white;
@@ -72,7 +72,7 @@ footer {
 }
 
 .input {
-  margin-top: 48px;
+  margin-top: 8px;
   z-index: 1;
   background-color: #02053c;
 }
@@ -114,4 +114,75 @@ footer {
     display: flex;
     flex-direction: row-reverse;
   }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 2%;
+  left: 5%;
+  width: 90%;
+  height: 96%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: scroll;
+  background-color: white;
+
+  button {
+    margin-bottom: 5px;
+  }
+}
+
+.modal1 {
+  background-color: #fff;
+  height: 90%;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.modal1 h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal1 p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+.modal1 ul {
+  list-style: auto;
+}
+
+.modal1 li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+.modal1 button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  color: white;
+  margin-right: 5px;
+
+  span {
+    color: grey;
+  }
+}
+
+.check {
+  margin: 20px 4% 0px 5%;
+  width: 10%;
 }

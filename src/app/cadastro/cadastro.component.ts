@@ -26,6 +26,7 @@ export class CadastroComponent {
   dadosUsuarios: Usuarios;
   idUsuario: any;
   erro : string;
+  openTermo = false
 
   constructor(
     private router: Router,
@@ -89,5 +90,12 @@ export class CadastroComponent {
 
   backBtn() {
     this.router.navigate(['/inicial']);
+  }
+  termo(){
+    this.openTermo = true
+  }
+
+  closeTermo(){
+    this.openTermo = false
   }
 }
