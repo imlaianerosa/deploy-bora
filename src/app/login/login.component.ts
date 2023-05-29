@@ -15,16 +15,13 @@ import { BaseBoraComponent } from '../shared/components/base-bora/base-bora.comp
 export class LoginComponent extends BaseBoraComponent {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   submitted = false;
   idUsuario: any;
-  mostrarModal = false
-  erro: string
+  mostrarModal = false;
+  erro: string;
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -40,27 +37,32 @@ export class LoginComponent extends BaseBoraComponent {
       this.loginService
         .putEsqueciMinhaSenha(this.form.controls.email.value)
         .subscribe(
-          (success) =>
-           this.openModalSucesso(),
-          (error) => this.openModalFalha(),
+          (success) => this.openModalSucesso(),
+          (error) => this.openModalFalha()
         );
     }
   }
 
   postLogin() {
-    this.loginService
-      .getLogin(this.form.value)
-      .subscribe((dados) => (this.idUsuario = dados));
-    setTimeout(() => {
-      this.boraStore.setIdUsuarioLogado(this.idUsuario);
-     setTimeout(() => {
-       if (this.idUsuario) {
-          this.goToFeed();
-        } else {
-          this.openModalFalhaLogin();
-        }
-    }, 500); 
-    }, 1000);
+    const body = {
+      email: this.form.controls.email.value,
+      senha: this.form.controls.senha.value,
+    };
+    this.loginService.getLogin(body).subscribe((id) => {
+      console.log(id);
+      this.idUsuario = id;
+      console.log(id);
+      setTimeout(() => {
+        this.boraStore.setIdUsuarioLogado(this.idUsuario);
+        setTimeout(() => {
+          if (this.idUsuario) {
+            this.goToFeed();
+          } else {
+            this.openModalFalhaLogin();
+          }
+        }, 500);
+      }, 1000);
+    });
   }
 
   backBtn() {
@@ -72,17 +74,17 @@ export class LoginComponent extends BaseBoraComponent {
   }
 
   openModalSucesso() {
-    this.erro = "E-mail de redefinição de senha enviado."
+    this.erro = 'E-mail de redefinição de senha enviado.';
     this.mostrarModal = true;
   }
 
   openModalFalha() {
-    this.erro = "Erro ao tentar redefinir senha :("
+    this.erro = 'Erro ao tentar redefinir senha :(';
     this.mostrarModal = true;
   }
 
   openModalFalhaLogin() {
-    this.erro = "Usuário ou senha incorreta"
+    this.erro = 'Usuário ou senha incorreta';
     this.mostrarModal = true;
   }
 

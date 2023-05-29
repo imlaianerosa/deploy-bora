@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
-import { loginGet } from './login';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  SERVER_URL = 'https://tg-bora-api.vercel.app';
+  SERVER_URL = 'https://tg-bora-api.vercel.app/login';
 
   constructor(private http: HttpClient) {}
 
@@ -17,9 +16,7 @@ export class LoginService {
       .pipe(take(1));
   }
 
-  getLogin(data: any) {
-    return this.http.get<loginGet>(`${this.SERVER_URL}/login`, {
-      headers: data,
-    });
+  getLogin(body: any) {
+    return this.http.post(`${this.SERVER_URL}`, body).pipe(take(1));
   }
 }
